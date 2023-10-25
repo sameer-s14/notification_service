@@ -70,7 +70,9 @@ class RabbitMqService {
       throw new Error("Message failed to receive");
     }
     const data = JSON.parse(messageData?.content.toString());
-    console.log("Message received :", data);
+    // console.log("Message received :", data.metadata);
+    // console.log("data",data)
+    // console.log(">>>",this.actions)
     // handling user actions
     if (this.actions.userActions[data?.action]) {
       userFactoryInstance.initiate(data);
@@ -83,7 +85,7 @@ class RabbitMqService {
 
       await channel.consume(queue, this.onMessageHandler, this.options);
     } catch (error: unknown) {
-      console.log("RabbitMQ Error in RabbitMqService consumeMessage");
+      console.log("RabbitMQ Error in RabbitMqService consumeMessage",error);
       if (error instanceof Error) throw error.message;
     }
   }

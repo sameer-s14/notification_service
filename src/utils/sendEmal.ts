@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import {Config} from "../config"
 
-export const sendMail = async (email: string, code: string) => {
+export const sendMail = async (email: string, content: string) => {
     const mailTransporter = nodemailer.createTransport({
       service: Config.EMAIL_SERVICE,
       auth: {
@@ -13,7 +13,7 @@ export const sendMail = async (email: string, code: string) => {
       from: Config.EMAIL_USERNAME,
       to: email,
       subject: 'Please Verify Your Email',
-      text: `Your code is ${code} please Verify. It Will Be Expire In 25 Minutes.`,
+      text: content,
     };
     await mailTransporter.sendMail(mailDetails, function (err, data) {
       if (err) {

@@ -14,7 +14,8 @@ const  sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
     logging: false,
     dialectOptions: {
       ssl: {
-        require: 'true',
+        require: true,
+        rejectUnauthorized: false, // Disable SSL verification
       },
     },
   });
@@ -25,6 +26,7 @@ const connection = async () => {
       console.log('😀 database connected successfully');
     })
     .catch(async (err: any) => {
+      console.log("err", err)
       console.log('database not connected');
     });
 };

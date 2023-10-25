@@ -25,13 +25,19 @@ Email_Template.init(
     type: {
       type: DataTypes.STRING,
     },
+    createdAt:{
+      type: DataTypes.DATE,
+    },
+    updatedAt:{
+      type: DataTypes.DATE,
+    },
   },
   {
-    timestamps: true,
+    timestamps: false,
     sequelize: sequelizeConnection,
-    paranoid: true,
     tableName: 'email_templates',
-    underscored:true
+    underscored:true,
+    modelName:"Email_Template"
   }
 );
 export { Email_Template };
